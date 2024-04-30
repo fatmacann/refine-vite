@@ -8,6 +8,9 @@ import { EditProduct } from "./pages/products/edit";
 import { ListProducts } from "./pages/products/list";
 import { CreateProduct } from "./pages/products/create";
 
+import { Login } from "./pages/login";
+import { Header } from "./components/header";
+
 export default function App(): JSX.Element {
   return (
     <Refine
@@ -16,8 +19,9 @@ export default function App(): JSX.Element {
     >
       <Authenticated
         key="protected"
-        fallback={<div>Not authenticated</div>}
+        fallback={<Login />}
       >
+        <Header />
         {/* <ShowProduct /> */}
         {/* <EditProduct /> */}
         <ListProducts />

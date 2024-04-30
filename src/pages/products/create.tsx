@@ -1,16 +1,15 @@
 import { useForm, useSelect } from "@refinedev/core";
 
-export const EditProduct = () => {
-  const { onFinish, mutationResult, queryResult } = useForm({
-    action: "edit",
+export const CreateProduct = () => {
+  const { onFinish, mutationResult } = useForm({
+    action: "create",
     resource: "products",
-    id: "123"
   });
-
-  const record = queryResult.data?.data;
 
   const { options } = useSelect({
     resource: "categories",
+    // optionLabel: "title", // Default value is "title" so we don't need to provide it.
+    // optionValue: "id", // Default value is "id" so we don't need to provide it.
   });
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -28,38 +27,21 @@ export const EditProduct = () => {
   return (
     <form onSubmit={onSubmit}>
       <label htmlFor="name">Name</label>
-      <input type="text" id="name" name="name" defaultValue={record?.name} />
+      <input type="text" id="name" name="name" />
 
       <label htmlFor="description">Description</label>
-      <textarea
-        id="description"
-        name="description"
-        defaultValue={record?.description}
-      />
+      <textarea id="description" name="description" />
 
       <label htmlFor="price">Price</label>
-      <input
-        type="text"
-        id="price"
-        name="price"
-        pattern="\d*.?\d*"
-        defaultValue={record?.price}
-      />
+      <input type="number" id="price" name="price" step=".01" />
 
       <label htmlFor="material">Material</label>
-      <input
-        type="text"
-        id="material"
-        name="material"
-        defaultValue={record?.material}
-      />
+      <input type="text" id="material" name="material" />
 
       <label htmlFor="category">Category</label>
       <select id="category" name="category">
         {options?.map((option) => (
-          <option key={option.value} value={option.value}
-            selected={record?.category.id == option.value}
-            >
+          <option key={option.value} value={option.value}>
             {option.label}
           </option>
         ))}
